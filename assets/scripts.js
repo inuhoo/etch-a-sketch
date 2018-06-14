@@ -1,4 +1,5 @@
 const screen = document.querySelector('#screen');
+let color = 0;
 
 //create pixel grid
 function createGrid(size) {
@@ -13,12 +14,11 @@ function createGrid(size) {
 createGrid(16);
 
 //add hover event listeners
-
 function onHover() {
     let pixels = Array.from(document.querySelectorAll(".pixel"));
     for (i = 0; i < pixels.length; i++) {
         pixels[i].addEventListener('mouseover', function (e) {
-            (this.style.opacity) ? this.style.opacity = parseFloat(this.style.opacity) + 0.1 : this.style.opacity = 0.1;
+            (this.style.opacity) ? this.style.opacity = parseFloat(this.style.opacity) + 0.1: this.style.opacity = 0.1;
         });
     }
 }
@@ -26,14 +26,53 @@ onHover();
 
 
 // clear board on click
-document.querySelector("#left-knob").addEventListener('click', function (e) {
+document.querySelector("#left-knob").addEventListener('click', e => {
     let newsize = Number(window.prompt('please provide a new grid size', 16));
 
-    if(newsize) {
+    if (newsize) {
         while (screen.hasChildNodes()) {
             screen.removeChild(screen.lastChild);
         }
         createGrid(newsize);
         onHover();
+        (color) ? colourful(): "";
     }
-})
+});
+
+// toggle B/W and color pixels 
+document.querySelector('#right-knob').addEventListener('click', e => {
+    if (color) {
+        color = 0;
+        bw();
+    } else {
+        color = 1;
+        colourful();
+    }
+});
+//add color to pixels
+function colourful() {
+    let pixels = Array.from(document.querySelectorAll(".pixel"));
+    const hexSymbol = "0123456789abcdef"
+
+    // loop through each pixel
+    for (i = 0; i < pixels.length; i++) {
+        let color = "#";
+        pixels[i].style.opacity = 0;
+        //create a random hexcode for each pixel
+        for (var j = 0; j < 6; j++) {
+            color += hexSymbol.charAt(Math.floor(Math.random() * hexSymbol.length));
+        }
+        //set pixel to new color
+        console.log(Math.floor(Math.random() * hexSymbol.length));
+        pixels[i].style.backgroundColor = color;
+    }
+};
+
+// remove color from pixels 
+function bw() {
+    let pixels = Array.from(document.querySelectorAll(".pixel"));
+    for (i = 0; i < pixels.length; i++) {
+        pixels[i].style.opacity = 0;
+        pixels[i].style.backgroundColor = "black";
+    }
+};
