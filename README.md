@@ -21,3 +21,7 @@ requirements as follows:
 
 * (Optional): Instead of just changing the color of your grid from black to white (for example) have each pass through it with the mouse change to a completely random RGB value. Then try having each pass just add another 10% of black to it so that only after 10 passes is the square completely black.
 Push your project to GitHub!
+
+view it working [here](https://inuhoo.github.io/etch-a-sketch/)
+ 
+ please contact me if you have any suggestions for improvements or extensions. 

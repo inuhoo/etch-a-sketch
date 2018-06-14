@@ -35,7 +35,6 @@ onHover();
 document.querySelector("#left-knob").addEventListener('click', e => {
     let newsize = Number(window.prompt('please provide a new grid size', 16));
     // only if new size is provided create remove old grid
-    if (typeof(newsize) != 'number') { newsize = Number(window.prompt('please provide a new grid size', 16));}
     if (newsize) {
         while (screen.hasChildNodes()) {
             screen.removeChild(screen.lastChild);
