@@ -11,31 +11,39 @@ function createGrid(size) {
         screen.appendChild(pixel);
     }
 }
+
+//load starting grid
 createGrid(16);
 
 //add hover event listeners
 function onHover() {
     let pixels = Array.from(document.querySelectorAll(".pixel"));
+    // loop through each pixel adding listener
     for (i = 0; i < pixels.length; i++) {
         pixels[i].addEventListener('mouseover', function (e) {
+            //change css value based on current value
             (this.style.opacity) ? this.style.opacity = parseFloat(this.style.opacity) + 0.1: this.style.opacity = 0.1;
         });
     }
 }
+
+//apply event listeners to inital grid
 onHover();
 
 
 // clear board on click
 document.querySelector("#left-knob").addEventListener('click', e => {
     let newsize = Number(window.prompt('please provide a new grid size', 16));
-
+    // only if new size is provided create remove old grid
+    if (typeof(newsize) != 'number') { newsize = Number(window.prompt('please provide a new grid size', 16));}
     if (newsize) {
         while (screen.hasChildNodes()) {
             screen.removeChild(screen.lastChild);
         }
-        createGrid(newsize);
-        onHover();
-        (color) ? colourful(): "";
+    //create new grid from size    
+    createGrid(newsize);
+    onHover();
+    (color) ? colourful(): "";
     }
 });
 
